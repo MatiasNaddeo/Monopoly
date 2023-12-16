@@ -1,0 +1,19 @@
+- Estilos a toda la página =)
+
+
+  
+
+
+
+
+- Opcional:
+  - Separar las fichas
+  - Poner animacion de ganar o perder plata al lado de cada info_player
+  - Tp con los ferrocarriles
+  - Carcel por triple doble
+  - Método online
+    - Lobby de servidores
+    - Funcionalidades del metodo online
+  - Victoria
+- Animaciones
+  - animacion cambio_dinero

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/CSS/style.css" rel="stylesheet" type="text/css">
+  <title>Juego</title>
+</head>
+<body class="body_juego">
+
+  <!--
+  <button onclick="adquirir_monopolio()">adquirir monopolio</button>
+  <button onclick="bancarrota_prueba()">bancarrota</button>
+  <button onclick="mostrar_algo()">mostrar algo</button>
+  -->
+  <div class="pantalla_oscura" id="pantalla_oscura"></div>
+
+  <section class="section_juego">
+
+    
+    <div class = "info_players" id = "info_players">
+    <div class="contenedor_info_players" id ="contenedor_info_players">
+      {%for a in range(cant_players)%}
+    <div class="info_player{{a+1}} info">
+      <h5>Jugador {{a+1}}</h5>
+      <p id = "dinero_player{{a+1}}">${{dinero[a]}}</p>
+    </div>
+  {%endfor%}
+    </div>
+  </div>
+    
+    <div class= "grid" id= "grid">
+      <button onclick="empezar_partida()" class="boton_empezar_partida" id = "boton_empezar_partida">Empezar Partida</button>
+      <div class = "fondo_tablero">
+      </div>
+      <div class="div_logo_grid">
+        <img src="../static/image/logoMonopoly.png" alt="" class="logo_grid">  
+      </div>
+      
+        {%for i in range(40)%}
+          {%if resul[i][1] == "propiedad" and resul[i][2] != "compañia" and resul[i][2] != "ferrocarril"%}
+      <div class="card div{{i+1}} propiedad {%if 2<= i+1<=10%}seccion1{%endif%}{%if 12<= i+1<=20%}seccion2{%endif%}{%if 22<= i+1<=30%}seccion3{%endif%}{%if 32<= i+1<=40%}seccion4{%endif%}" id = "div{{i+1}}">
+        <div class = "color {{resul[i][2]}}">
+          <div class=" div_casas div_casa{{i+1}}" id="div_casa{{i+1}}"></div>
+        </div>
+        <div class="texto">
+          <h3>{{resul[i][3]}}</h3>
+          <h4>${{resul[i][4]}}</h4>
+        </div>
+      </div>
+          {%else%}
+            {%if resul[i][3] != "Salida"%}
+      <div class= "card div{{i+1}} especial_casilla {%if 2<= i+1<=10%}seccion1{%endif%}{%if 12<= i+1<=20%}seccion2{%endif%}{%if 22<= i+1<=30%}seccion3{%endif%}{%if 32<= i+1<=40%}seccion4{%endif%}" id = "div{{i+1}}">
+              <p>{{resul[i][3]}}</p>
+            <img src="../static/image/{{resul[i][11]}}" alt="Imagen de {{resul[i][3]}}" class="img_casillas">
+      </div>
+            {%else%}
+      <div class= "card div{{i+1}} especial_casilla" id = "div{{i+1}}">
+          <p>SALIDA</p>
+      </div>
+            {%endif%}
+          {%endif%}
+        {%endfor%}
+      <div>
+        
+      </div>
+      <button id ="btn_dados" class="btn_dados" onclick="tirar_dados()" hidden>
+          <div class="cube1" id="cubo1" hidden>
+              <div class="cube-face front">
+                  <div class="inside">
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face back">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face left">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face right">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face top">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face bottom">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+          </div>
+        <div class="cube2" id="cubo2" hidden>
+              <div class="cube-face front">
+                  <div class="inside">
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face back">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face left">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face right">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face top">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+              <div class="cube-face bottom">
+                  <div class="inside">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                  </div>
+              </div>
+          </div>
+      </button>
+      <div class ="casilla_arca_comunal" id ="casilla_arca_comunal">
+        <div class="arca_comunal">
+          <img src="/static/image/arca_comunal.png" alt="">
+        </div>
+      </div>
+      <div class ="casilla_fortuna" id ="casilla_fortuna">
+        <div class="fortuna">
+          <img src="/static/image/fortuna.png" alt="">
+        </div>
+      </div>
+      <button onclick="pasar_turno()" id = "btn_pasar_turno" class="btn_pasar_turno" hidden>Pasar Turno</button>
+      
+      <div id = "contenedor_negociacion" class = "contenedor_negociacion">
+        <img src="https://cdn-icons-png.flaticon.com/512/1787/1787039.png">
+        <div class = "subcontenedor1_negociacion">
+          <div class="parametros_negociacion_persona" id="parametros_negociacion_persona1">
+            <h4 id = "nombre_persona1">-----</h4>
+            <p id="dinero_persona1">5000</p>
+            <input type="number" placeholder="monto" id="input_dinero_negociacion_persona1" value="0">
+            <select name="select_propiedades_negociacion_persona1" id="select_propiedades_negociacion_persona1">
+              <option value="-----">-----</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="negociar()" class="btn_negociacion" id="btn_negociacion">Enviar</button>
+        <div class = "subcontenedor2_negociacion">
+          <select name="select_player_negociacion" id="select_player_negociacion">
+            <option value="-----">-----</option>
+          </select>
+          <h4 id = "nombre_persona2">-----</h4>
+          <div class="parametros_negociacion_persona" id="parametros_negociacion_persona2">
+              <p id="dinero_persona2">5000</p>
+              <input type="number" placeholder="monto" id="input_dinero_negociacion_persona2" value="0">
+              <select name="select_propiedades_negociacion_persona2" id="select_propiedades_negociacion_persona2">
+                <option value="-----">-----</option>
+              </select>
+            </div>
+        </div>
+        <button onclick="aceptar_trato()"id = "btn_aceptar_trato" hidden>Aceptar</button>
+        <button onclick="negar_trato()"id = "btn_negar_trato" hidden>Rechazar</button>
+      </div>
+  
+  
+      
+      <div class="subasta" id="subasta" hidden>
+        <img src="https://cdn-icons-png.flaticon.com/512/1078/1078274.png">
+        <h1 id="subasta_propiedad_nombre">sks</h1>
+        <div class="div_subasta" id="div_subasta">
+          
+          <ul class="ul_subasta" id="ul_subasta">
+  
+          </ul>
+          <h3 id="subasta_jugador">ss</h3>
+          <input type="number" class="input_subasta" id="input_subasta"> 
+          <button onclick="subir_subasta()" id="subir_subasta">apostar</button>
+          <button onclick="abandonar_subasta()" id="abandonar_subasta">abandonar</button>
+        </div>
+      </div>
+  
+  
+  
+  <!--Propiedades-->
+      <div class="carta_propiedad" id ="carta_propiedad" hidden>
+        <div class="contenedor_propiedad">
+          <div class="carta_propiedad_color color_borrable" id ="carta_propiedad_color">
+          <h2>TITULO DE PROPIEDAD</h2>
+          <h1 id ="nombre_propiedad"></h1>
+        </div>
+          <div class="carta_propiedad_texto" id ="carta_propiedad_texto">
+            <h2 id="alquiler_propiedad"></h2>
+            <table class="tabla_precios" id="tabla_precios">
+              <tr>
+                <td class ="td1">Con 1 casa</td>
+                <td class ="td2" id ="1_casa_propiedad"></td>
+              </tr>
+              <tr>
+                <td class ="td1">Con 2 casas</td>
+                <td class ="td2" id ="2_casa_propiedad"></td>
+              </tr>
+              <tr>
+                <td class ="td1">Con 3 casas</td>
+                <td class ="td2" id ="3_casa_propiedad"></td>
+              </tr>
+              <tr>
+                <td class ="td1">Con 4 casas</td>
+                <td class ="td2" id ="4_casa_propiedad"></td>
+              </tr>
+              <tr>
+                <td class ="td1">Con HOTEL</td>
+                <td class ="td2" id ="5_casa_propiedad"></td>
+              </tr>
+              <tr>
+                <td class ="td1">Valor hipotecario</td>
+                <td class ="td2" id ="hipoteca_propiedad"></td>
+              </tr>
+            </table>
+            <p class="p1" id ="infoextra_propiedad"></p>
+            <p class="p2">Cuando un jugador posee los Títulos de Propiedad de todos los terrenos de un grupo completo de un color, se dobla el alquiler de los terrenos sin edificar</p>
+          </div>
+        </div>
+      </div>
+      <!--FERROCARRILES-->
+      <div class ="carta_ferrocarril" id ="carta_ferrocarril" hidden>
+        <div class="contenedor_ferrocarril">
+          <img src="../static/image/tren.png" alt="Ferrocarril" class = "imagen_ferrocarril">
+        <h2 class ="nombre_ferrocarril" id ="nombre_ferrocarril">FERROCARRIL B & O.</h2>
+        <table class="tabla_precios tabla_ferrocarril">
+          <tr>
+            <td>ALQUILER</td>
+            <td class="td_ferrocarril">$ 25</td>
+          </tr>
+          <tr>
+            <td>Con 2 Ferrocarriles</td>
+            <td class="td">$ 50</td>
+          </tr>
+          <tr>
+            <td>Con 3 Ferrocarriles</td>
+            <td>$ 100</td>
+          </tr>
+          <tr>
+            <td>Con 4 Ferrocarriles</td>
+            <td>$ 200</td>
+          </tr>
+          <tr>
+            <td>Valor hipotecario</td>
+            <td>$ 100</td>
+          </tr>
+        </table>
+        </div>
+      </div>
+      <!--Compañias-->
+      <div class="carta_compañia" id ="carta_compañia" hidden>
+        <div class= "contenedor_compañia">
+          <img src="" alt="Foto de compañia" class="imagen_compañia" id="imagen_compañia">
+          <h2 class="nombre_compañia" id = "nombre_compañia">dd</h2>
+          <p class="p1">Si posee UNA carta de Compañia de Servicio Público, el alquiler es 4 veces el número salido en los dados.</p>
+          <p class ="p2">Si posee DOS cartas de Compañia de Servicio Público, el alquiler es 10 veces el número salido en los dados.</p>
+          <p class ="p3">El valor de hipoteca es de $75</p>
+        </div>
+      </div>
+      <div class = "btns_compra_subasta" id = "btns_compra_subasta" hidden>
+        <div class="contenedor_compra_subasta">
+          <button onclick="comprar()">Comprar</button>
+        <button onclick="subastar()">Subastar</button>  
+        </div>
+      </div>
+      <button id="btn_pasar_carta" class="btn_pasar_carta" onclick="pasar_carta()" hidden>Pasar Carta</button>
+    </div><!--fin del grid-->
+    <div class="btns" id="btns" >
+       
+      <div class="botonesJuego" id ="botonesJuego">
+        <button onclick="pre_negociar()" id="btn_pre_negociar" class="btn_pre_negociar">Negociar</button>
+        <button onclick="construir('comprar')" id="btn_construir" class="btn_construir">Construir</button>
+        <button onclick="construir('vender')" id="btn_demoler" class="btn_demoler">Demoler</button>
+      </div>
+    </div>
+    
+  </section>
+  
+  
+  
+
+  
+  <!--<button class="btn_hipotecar" id="btn_hipotecar" onclick="funcion_rivas('hipotecar')">hipotecar</button>
+  <button class="btn_redimir" id="btn_redimir" onclick="funcion_rivas('redimir')">redimir</button>
+  <button class="atras_hipotecar_redimir" id="atras_hipotecar_redimir" onclick="atras_funcion_rivas()">atras hipotecar redimir</button>-->
+
+    <div class="ultimoAtras">
+   <form action="{{url_for('lobby_atras')}}" type="POST">
+    <input type="submit" value="Atrás">
+  </form>
+    </div>
+
+  
+  
+    <h1 class = "animacion_dinero"></h1>
+  
+
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="static/JS/script.js"></script>
+</body>
+</html>
+
+

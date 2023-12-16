@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="html2">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/CSS/style.css" rel="stylesheet" type="text/css">
+  <title>Ingresar</title>
+</head>
+<body class="bodyIngresar">
+  <div class="text" data-text="Inicio" contenteditable="true">Inicio</div>
+  <br>
+    <div class="formIngresar">
+  <form action="{{url_for('login')}}" method ="POST" class="formIngresarEnter">
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" name="name">  
+    </div>
+    <div>
+      <label for="password">Contraseña:</label>
+      <input type="text" name="password">  
+    </div>
+    
+    
+    <input type="Submit" value="Enter" class="botonEnter">
+    <div class="botonAtras2">
+    <button style="color: white; background-color: transparent; border-color: transparent;"  onclick={{url_for('index')}}">Atrás</button>
+    </div>
+  </form>
+   
+      
+    </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/JS/script.js"></script>
+</body>
+</html>

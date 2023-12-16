@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" class="html2">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/CSS/style.css" rel="stylesheet" type="text/css">
+  <title>login</title>
+</head>
+<body class="bodyRegistrar">
+  <div class="text" data-text="Registro" contenteditable="true">Registro</div>
+  <br>
+  <div class ="formRegistro">
+    <form action="{{url_for('index')}}">
+    <input type="submit" value="Atrás" class="botonAtras">
+    </form>
+  <form action="{{url_for('crear_cuenta')}}" method ="POST">
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" name="name" required>
+    </div>
+    <div>
+      <label for="password">Contraseña:</label>
+      <input type="text" name="password" required>
+    </div>
+    
+    <input type="submit" value="submit" class="botonSumbit">
+  </form>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/JS/script.js"></script>
+</body>
+</html>
